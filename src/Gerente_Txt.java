@@ -14,7 +14,8 @@ public class Gerente_Txt {
                 String[] partes = linha.split(";");
                 int idProf = Integer.parseInt(partes[0].trim());
                 String nome = partes[1].trim();
-                professores.add(new Professor(idProf, nome));
+                String Pref = partes[2].trim();
+                professores.add(new Professor(idProf, nome, Pref));
             }
         } catch (IOException e) {
             System.err.println("Erro ao ler o arquivo de professores: " + e.getMessage());

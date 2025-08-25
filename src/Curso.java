@@ -13,7 +13,7 @@ public class Curso {
         this.nomeCurso = nomeCurso;
         this.materiasCurso = new ArrayList<>();
         this.professoresCurso = new ArrayList<>();
-        this.gradeDeAulas = new Tabela(); // Instanciando a Tabela aqui
+        this.gradeDeAulas = new Tabela(); // Instanciando a Tabela aqui // TEM QUE VER A INICIALIZACAO CONSISTENTE ENTRE TABELAS
     }
 
     // Métodos para gerenciar as listas de professores e matérias
@@ -41,5 +41,9 @@ public class Curso {
 
     public List<Materia> getMateriasCurso() {
         return materiasCurso;
+    }
+
+    public List<Professor> getProfessorCurso() {
+        return professoresCurso;
     }
 }

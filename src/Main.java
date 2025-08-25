@@ -9,9 +9,9 @@ public class Main {
         try {
             // Cria o arquivo professores.txt
             FileWriter fwProf = new FileWriter("professores.txt");
-            fwProf.write("1;João Silva\n");
-            fwProf.write("2;Maria Oliveira\n");
-            fwProf.write("3;Pedro Santos\n");
+            fwProf.write("1;João Silva;02000000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+            fwProf.write("2;Maria Oliveira;00000000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+            fwProf.write("3;Pedro Santos;00000000000000000000000000000000000000000000000000000000000000000000000000000000\n");
             fwProf.close();
 
             // Cria o arquivo materias.txt
@@ -68,5 +68,7 @@ public class Main {
         //engenhariaSoftware.retirarAula(1, 1); // Terça, 10:00
         
         engenhariaSoftware.mostrarGradeAtual(); // Exibe a grade após a remoção
+
+        engenhariaSoftware.getProfessorCurso().get(0).ExibirTabelaPrefProf();
     }
 }
