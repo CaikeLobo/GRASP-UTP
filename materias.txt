@@ -1,4 +1,0 @@
-101;Algoritmos;1;60
-102;Estrutura de Dados;2;80
-103;Programacao Orientada a Objetos;1;80
-104;Banco de Dados;3;60
