@@ -3,12 +3,14 @@ public class Materia {
     private String NomeMateria;
     private Professor ProfessorResponsavel;
     private int CargaHoraria;
+    private int Periodo;
 
-    public Materia(String IDMateria, String NomeMateria, Professor ProfessorResponsavel, int CargaHoraria) {
+    public Materia(String IDMateria, String NomeMateria, Professor ProfessorResponsavel, int CargaHoraria, int Periodo) {
         this.IDMateria = IDMateria;
         this.NomeMateria = NomeMateria;
         this.ProfessorResponsavel = ProfessorResponsavel;
         this.CargaHoraria = CargaHoraria;
+        this.Periodo = Periodo;
     }
 
     public String getIDMateria() {
@@ -41,5 +43,9 @@ public class Materia {
 
     public void setCargaHoraria(int CargaHoraria) {
         this.CargaHoraria = CargaHoraria;
+    }
+
+    public int getPeriodo() {
+        return Periodo;
     }
 }

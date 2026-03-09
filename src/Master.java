@@ -156,16 +156,23 @@ public class Master {
     }
 
     public void PreencherHorariosRandonicamente() {
-        for (int i = 0; i < 500; i++) {
-            int idCurso = 1; //(int) (Math.random() * 10) + 1; // IDs de 1 a 10
-            int horarioIndex = (int) (Math.random() * 8); // índices de 0 a 7
-            int linha = (int) (Math.random() * 5); // linhas de 0 a 4
-            int coluna = (int) (Math.random() * 16); // colunas de 0 a 15
-            String idMateria = "MAT" + ((int) (Math.random() * 47) + 1); // MAT1 a MAT47
+        for (int i = 0; i < 48; i++) {
+            Materia mat = findMateria("MAT" + (i + 1));
+            int Carga = (mat.getCargaHoraria()/20);
+            System.out.println("Preenchendo horário para matéria: " + mat.getIDMateria() + " - " + Carga);
+            for (int hora = Carga; hora > 0; hora--) {
+                //System.out.println("FOi@");
+                int idCurso = 1; //(int) (Math.random() * 10) + 1; // IDs de 1 a 10
+                int horarioIndex = mat.getPeriodo();
+                int linha = (int) (Math.random() * 5); // linhas de 0 a 4
+                int coluna = (int) (Math.random() * 16); // colunas de 0 a 15
+                String idMateria = mat.getIDMateria(); // MAT1 a MAT47
 
             if (adicionarMateriaEmHorario(idCurso, horarioIndex, linha, coluna, idMateria) == false){
-                i--;
+                hora++;
             }
+
+            }     
         }
     }
 }

@@ -44,8 +44,9 @@ public class GerenteTxt {
                     String nome = parts[1].trim();
                     int profId = Integer.parseInt(parts[2].trim());
                     int carga = Integer.parseInt(parts[3].trim());
+                    int periodo = Integer.parseInt(parts[4].trim());
                     Professor prof = professores.stream().filter(p -> p.getIDProf() == profId).findFirst().orElse(null);
-                    materias.add(new Materia(id, nome, prof, carga));
+                    materias.add(new Materia(id, nome, prof, carga, periodo));
                 }
             }
         } catch (IOException e) {

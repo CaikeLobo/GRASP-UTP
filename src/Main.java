@@ -49,5 +49,9 @@ public class Main {
             }
         }
 
+        Pontuador pontuador = Pontuador.getInstance();
+    pontuador.calcularPontuacao();
+    pontuador.imprimirPontuacoes();
+
     }
 }
