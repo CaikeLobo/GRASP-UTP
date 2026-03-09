@@ -1,35 +1,45 @@
 public class Materia {
-    private int idMat;
-    private String nomeMat;
-    private Professor professor;
-    private int cargaHoraria;
+    private String IDMateria;
+    private String NomeMateria;
+    private Professor ProfessorResponsavel;
+    private int CargaHoraria;
 
-    public Materia(int idMat, String nomeMat, Professor professor, int cargaHoraria) {
-        this.idMat = idMat;
-        this.nomeMat = nomeMat;
-        this.professor = professor;
-        this.cargaHoraria = cargaHoraria;
+    public Materia(String IDMateria, String NomeMateria, Professor ProfessorResponsavel, int CargaHoraria) {
+        this.IDMateria = IDMateria;
+        this.NomeMateria = NomeMateria;
+        this.ProfessorResponsavel = ProfessorResponsavel;
+        this.CargaHoraria = CargaHoraria;
     }
 
-    // Getters
-    public int getIdMat() {
-        return idMat;
+    public String getIDMateria() {
+        return IDMateria;
     }
 
-    public String getNomeMat() {
-        return nomeMat;
+    public void setIDMateria(String IDMateria) {
+        this.IDMateria = IDMateria;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public String getNomeMateria() {
+        return NomeMateria;
+    }
+
+    public void setNomeMateria(String NomeMateria) {
+        this.NomeMateria = NomeMateria;
+    }
+
+    public Professor getProfessorResponsavel() {
+        return ProfessorResponsavel;
+    }
+
+    public void setProfessorResponsavel(Professor ProfessorResponsavel) {
+        this.ProfessorResponsavel = ProfessorResponsavel;
     }
 
     public int getCargaHoraria() {
-        return cargaHoraria;
+        return CargaHoraria;
     }
-    
-    @Override
-    public String toString() {
-        return "ID: " + idMat + ", Nome: " + nomeMat + ", Professor: " + professor.getNome();
+
+    public void setCargaHoraria(int CargaHoraria) {
+        this.CargaHoraria = CargaHoraria;
     }
 }

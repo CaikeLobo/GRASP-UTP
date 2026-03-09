@@ -1,23 +1,35 @@
 public class Professor {
-    private int idProf;
-    private String nome;
+    private int IDProf;
+    private String Nome;
+    private int[][] PrefProf;
 
-    public Professor(int idProf, String nome) {
-        this.idProf = idProf;
-        this.nome = nome;
+    public Professor(int IDProf, String Nome, int[][] PrefProf) {
+        this.IDProf = IDProf;
+        this.Nome = Nome;
+        this.PrefProf = PrefProf;
     }
 
-    // Getters
-    public int getIdProf() {
-        return idProf;
+    public int getIDProf() {
+        return IDProf;
+    }
+
+    public void setIDProf(int IDProf) {
+        this.IDProf = IDProf;
     }
 
     public String getNome() {
-        return nome;
+        return Nome;
     }
 
-    @Override
-    public String toString() {
-        return "ID: " + idProf + ", Nome: " + nome;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
+
+    public int[][] getPrefProf() {
+        return PrefProf;
+    }
+
+    public void setPrefProf(int[][] PrefProf) {
+        this.PrefProf = PrefProf;
     }
 }

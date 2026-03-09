@@ -1,45 +1,75 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Curso {
-    private int idCurso;
-    private String nomeCurso;
-    private List<Materia> materiasCurso;
-    private List<Professor> professoresCurso;
-    private Tabela gradeDeAulas; // Nova variável para a instância de Tabela
+    private int IDCurso;
+    private Horario[] ConjHorarios;
+    private Materia[] MateriasCurso;
+    private String NomeCurso;
 
-    public Curso(int idCurso, String nomeCurso) {
-        this.idCurso = idCurso;
-        this.nomeCurso = nomeCurso;
-        this.materiasCurso = new ArrayList<>();
-        this.professoresCurso = new ArrayList<>();
-        this.gradeDeAulas = new Tabela(); // Instanciando a Tabela aqui
+    public Curso(int IDCurso, Horario[] ConjHorarios, Materia[] MateriasCurso, String NomeCurso) {
+        this.IDCurso = IDCurso;
+        // always maintain exactly 8 horarios, filling null slots with empty Horario
+        if (ConjHorarios == null) {
+            this.ConjHorarios = new Horario[8];
+        } else if (ConjHorarios.length != 8) {
+            Horario[] tmp = new Horario[8];
+            System.arraycopy(ConjHorarios, 0, tmp, 0, Math.min(ConjHorarios.length, 8));
+            this.ConjHorarios = tmp;
+        } else {
+            this.ConjHorarios = ConjHorarios;
+        }
+        // make sure each position has a Horario instance
+        for (int i = 0; i < this.ConjHorarios.length; i++) {
+            if (this.ConjHorarios[i] == null) {
+                Materia[][] vazio = new Materia[5][16];
+                this.ConjHorarios[i] = new Horario(vazio);
+            }
+        }
+        this.MateriasCurso = MateriasCurso;
+        this.NomeCurso = NomeCurso;
     }
 
-    // Métodos para gerenciar as listas de professores e matérias
-    public void adicionarProfessor(Professor p) {
-        this.professoresCurso.add(p);
-    }
-    
-    public void adicionarMateria(Materia m) {
-        this.materiasCurso.add(m);
+    public int getIDCurso() {
+        return IDCurso;
     }
 
-    // Métodos para acessar a funcionalidade da Tabela
-    public void inserirAula(int dia, int horario, Materia materia) {
-        this.gradeDeAulas.inserirAula(dia, horario, materia);
+    public void setIDCurso(int IDCurso) {
+        this.IDCurso = IDCurso;
     }
 
-    public void retirarAula(int dia, int horario) {
-        this.gradeDeAulas.retirarAula(dia, horario);
+    public Horario[] getConjHorarios() {
+        return ConjHorarios;
     }
 
-    public void mostrarGradeAtual() {
-        System.out.println("\n--- Grade de Horários do Curso de " + this.nomeCurso + " ---");
-        this.gradeDeAulas.mostrarGradeAtual();
+    public void setConjHorarios(Horario[] ConjHorarios) {
+        if (ConjHorarios == null) {
+            this.ConjHorarios = new Horario[8];
+        } else if (ConjHorarios.length != 8) {
+            Horario[] tmp = new Horario[8];
+            System.arraycopy(ConjHorarios, 0, tmp, 0, Math.min(ConjHorarios.length, 8));
+            this.ConjHorarios = tmp;
+        } else {
+            this.ConjHorarios = ConjHorarios;
+        }
+        for (int i = 0; i < this.ConjHorarios.length; i++) {
+            if (this.ConjHorarios[i] == null) {
+                Materia[][] vazio = new Materia[5][16];
+                this.ConjHorarios[i] = new Horario(vazio);
+            }
+        }
     }
 
-    public List<Materia> getMateriasCurso() {
-        return materiasCurso;
+    public Materia[] getMateriasCurso() {
+        return MateriasCurso;
+    }
+
+    public void setMateriasCurso(Materia[] MateriasCurso) {
+        this.MateriasCurso = MateriasCurso;
+    }
+
+    public String getNomeCurso() {
+        return NomeCurso;
+    }
+
+    public void setNomeCurso(String NomeCurso) {
+        this.NomeCurso = NomeCurso;
     }
 }

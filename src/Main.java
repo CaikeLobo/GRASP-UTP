@@ -1,72 +1,53 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 public class Main {
-
-    // Método para criar os arquivos de teste
-    private static void criarArquivosDeTeste() {
-        try {
-            // Cria o arquivo professores.txt
-            FileWriter fwProf = new FileWriter("professores.txt");
-            fwProf.write("1;João Silva\n");
-            fwProf.write("2;Maria Oliveira\n");
-            fwProf.write("3;Pedro Santos\n");
-            fwProf.close();
-
-            // Cria o arquivo materias.txt
-            FileWriter fwMat = new FileWriter("materias.txt");
-            fwMat.write("101;Algoritmos;1;60\n");
-            fwMat.write("102;Estrutura de Dados;2;80\n");
-            fwMat.write("103;Programacao Orientada a Objetos;1;80\n");
-            fwMat.write("104;Banco de Dados;3;60\n");
-            fwMat.close();
-
-        } catch (IOException e) {
-            System.err.println("Erro ao criar os arquivos de teste: " + e.getMessage());
-        }
-    }
-
     public static void main(String[] args) {
-        
-        System.out.println("Criando arquivos de teste...");
-        criarArquivosDeTeste();
-        System.out.println("Arquivos criados com sucesso.");
+        Master master = Master.getInstance();
 
-        // 1. Ler dados dos arquivos e criar listas de objetos
-        System.out.println("\nLendo dados dos arquivos...");
-        List<Professor> professoresDoArquivo = Gerente_Txt.lerProfessores("professores.txt");
-        List<Materia> materiasDoArquivo = Gerente_Txt.lerMaterias("materias.txt", professoresDoArquivo);
-        
-        // 2. Criar um objeto Curso e popular suas listas
-        Curso engenhariaSoftware = new Curso(1, "Engenharia de Software");
-        
-        System.out.println("\nAdicionando professores e matérias ao curso...");
-        // Adicionando os professores lidos do arquivo
-        for (Professor p : professoresDoArquivo) {
-            engenhariaSoftware.adicionarProfessor(p);
+        System.out.println("Professores:");
+        for (Professor p : master.getProfessores()) {
+            System.out.println(p.getIDProf() + " - " + p.getNome());
         }
 
-        // Adicionando as matérias lidas do arquivo
-        for (Materia m : materiasDoArquivo) {
-            engenhariaSoftware.adicionarMateria(m);
+        System.out.println("\nMaterias:");
+        for (Materia m : master.getMaterias()) {
+            System.out.println(m.getIDMateria() + " - " + m.getNomeMateria() + " (Professor: " + (m.getProfessorResponsavel() != null ? m.getProfessorResponsavel().getNome() : "N/A") + ")");
         }
-        
-        // 3. Demonstrar a manipulação da grade de horários
-        engenhariaSoftware.mostrarGradeAtual(); // Exibe a grade vazia inicialmente
 
-        // Adicionar algumas aulas
-        // Materia 101 - Algoritmos (Professor João Silva)
-        Materia algoritmos = engenhariaSoftware.getMateriasCurso().get(0);
-        engenhariaSoftware.inserirAula(0, 0, algoritmos); // Segunda, 08:00
-        engenhariaSoftware.inserirAula(2, 2, algoritmos); // Quarta, 14:00
+        System.out.println("\nCursos:");
+        for (Curso c : master.getCursos()) {
+            System.out.println(c.getIDCurso() + " - " + c.getNomeCurso());
+        }
 
-        // Materia 102 - Estrutura de Dados (Professor Maria Oliveira)
-        //Materia estruturaDados = engenhariaSoftware.getMateriasCurso().get(1);
-        engenhariaSoftware.inserirAula(2, 6, engenhariaSoftware.getMateriasCurso().get(1)); // Terça, 10:00
+    
+        // exemplo de inserção de matéria no horário
+        System.out.println("\nInserindo MAT1 no curso 1, horário 0, posição (0,0)...");
+        //boolean ok = master.adicionarMateriaEmHorario(1, 0, 0, 0, "MAT1");
 
-        //engenhariaSoftware.retirarAula(1, 1); // Terça, 10:00
-        
-        engenhariaSoftware.mostrarGradeAtual(); // Exibe a grade após a remoção
+
+        master.adicionarMateriaEmHorario(1, 0, 0, 0, "MAT1");
+        master.adicionarMateriaEmHorario(1, 1, 0, 0, "MAT1");
+
+        master.PreencherHorariosRandonicamente();
+        // imprime todos os horários legíveis
+        System.out.println("\nImprimindo todos os horários:");
+        master.imprimirTodosHorarios();
+
+        // imprime preferências dos professores
+        //System.out.println("Imprimindo preferências dos professores:");
+        //master.imprimirPreferenciasProfessores();
+
+
+
+        System.out.println("\nValidando dados carregados:");
+        List<String> erros = master.validarDados();
+        if (erros.isEmpty()) {
+            System.out.println("Nenhum problema encontrado.");
+        } else {
+            for (String e : erros) {
+                System.err.println(e);
+            }
+        }
+
     }
 }
